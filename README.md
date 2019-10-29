@@ -40,3 +40,10 @@ as part of the URL endpoint in Insigts dashboard
 func (n NRPush) Push(ctx context.Context, data interface{}) (string, error)
 ```
 Push inserts a new custom data and return the UUID when successful
+
+#### func (NRPush) PushBatch
+
+```go
+func (n NRPush) PushBatch(ctx context.Context, data []interface{}) (string, error)
+```
+PushBatch inserts a batch of new custom data and return the UUID when successful

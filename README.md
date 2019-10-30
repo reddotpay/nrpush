@@ -14,6 +14,13 @@ const Endpoint = "https://insights-collector.newrelic.com/v1/accounts/{:accountI
 ```
 Endpoint defines the New Relic HTTP URL where the payload will be sent
 
+```go
+var (
+	// Verbose indicates if details of the HTTP request will be displayed
+	Verbose = false
+)
+```
+
 #### type NRPush
 
 ```go

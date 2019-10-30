@@ -19,6 +19,7 @@ func ExampleNRPush_Push() {
 	n := nrpush.New("somepushkey123", "111111", "transaction")
 	n.Endpoint = ts.URL
 
+	// nrpush.Verbose = true
 	uuid, err := n.Push(context.Background(), map[string]interface{}{
 		"amount":    100.00,
 		"product":   "test",

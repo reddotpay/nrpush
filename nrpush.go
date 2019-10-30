@@ -17,6 +17,11 @@ type NRPush struct {
 	EventType string
 }
 
+var (
+	// Verbose indicates if details of the HTTP request will be displayed
+	Verbose = false
+)
+
 // Endpoint defines the New Relic HTTP URL where the payload will be sent
 const Endpoint = "https://insights-collector.newrelic.com/v1/accounts/{:accountID}/events"
 
@@ -105,6 +110,10 @@ func (n NRPush) sendWithContext(ctx context.Context, data []byte) (string, error
 		responseBody []byte
 		err          error
 	)
+
+	if Verbose {
+		fmt.Printf("URL: %s %s\nInsertKey:%s\nBody:\n%s", n.Endpoint, http.MethodPost, n.InsertKey, string(data))
+	}
 
 	// HTTP
 	request, err = http.NewRequest(http.MethodPost, n.Endpoint, bytes.NewBuffer(data))

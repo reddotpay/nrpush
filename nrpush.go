@@ -6,7 +6,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
+	"regexp"
 	"strings"
 )
 
@@ -28,6 +30,13 @@ const Endpoint = "https://insights-collector.newrelic.com/v1/accounts/{:accountI
 // New creates sets a new NRPush configuration.
 // `accountID` numeric. Can be found as part of the URL endpoint in Insigts dashboard
 func New(insertKey, accountID, eventType string) NRPush {
+	reg, err := regexp.Compile("[^A-Za-z0-9]+")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	eventType = strings.ReplaceAll(strings.Title(reg.ReplaceAllString(eventType, " ")), " ", "")
+
 	return NRPush{
 		Endpoint:  strings.Replace(Endpoint, "{:accountID}", accountID, 1),
 		InsertKey: insertKey,
